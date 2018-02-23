@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numBlocks: 1
   block: {fileID: 1927726412101230, guid: 238301a04dd8f424eb10f09abcc6dce1, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1078813271}
   blocksRb: []
   blocks: []
 --- !u!4 &1683433180

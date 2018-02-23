@@ -13,6 +13,7 @@ public class BlockMovement : MonoBehaviour {
     private Vector3 moveRight;
     private Vector3 moveLeft;
     private bool isMovingRight;
+    private bool isStopped;
 
     // Use this for initialization
     void Start() {
@@ -32,14 +33,24 @@ public class BlockMovement : MonoBehaviour {
         }
 
         isMovingRight = true;
+        isStopped = false;
 
 
     }
 
     // Update is called once per frame
     void FixedUpdate() {
+        Debug.Log(DoesPlayerLandOnBlock(blocksRb[0]));
+        if (DoesPlayerLandOnBlock(blocksRb[0]))
+        {
+
+            blocksRb[0].velocity = new Vector3(0, 0, 0);
+            isStopped = true;
+        }
 
         BlockMoveLeftAndRight(blocksRb[0]);
+
+
 
 
     }
@@ -47,7 +58,7 @@ public class BlockMovement : MonoBehaviour {
     // This method makes the block move left and right.
     void BlockMoveLeftAndRight(Rigidbody rb)
     {
-        if (isMovingRight)
+        if (isMovingRight && !isStopped)
         {
             rb.velocity = moveRight;
             if (rb.position.x >= 6)
@@ -55,7 +66,7 @@ public class BlockMovement : MonoBehaviour {
                 isMovingRight = false;
             }
         }
-        else
+        else if(!isMovingRight && !isStopped)
         {
             rb.velocity = moveLeft;
             if (rb.position.x <= -6)
@@ -65,14 +76,21 @@ public class BlockMovement : MonoBehaviour {
         }
     }
 
-    /*
+    // Determines whether or not player lands on the block. If it does. it will stop movement.
     bool DoesPlayerLandOnBlock(Rigidbody rb)
     {
-        bool doesPlayerLandOnBlock = false;
 
-        if(this.player.transform.position.y == rb)
+        if((rb.transform.position.x >= -1) && (rb.transform.position.x <= 1) && ( player.transform.position.y <=  rb.transform.localScale.y + 1.05 && player.transform.position.y >= rb.transform.localScale.y + 1))
+        {
 
-        return doesPlayerLandOnBlock;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+       
     }
-    */
+    
 }
