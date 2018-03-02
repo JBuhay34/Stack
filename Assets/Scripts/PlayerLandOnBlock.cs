@@ -18,7 +18,8 @@ public class PlayerLandOnBlock : MonoBehaviour {
 		switch (col.tag) {
 		case "block": 
 			Debug.Log ("It hits block");
-			BlockMovement.SetIsCurrentBlockStopped(true);
+            // Need to get the current block that is moving in order to make this method work.
+			//BlockMovement.SetIsMoving(false);
 			break;
 		}
 	}

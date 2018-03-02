@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class BlockMovement : MonoBehaviour {
 
-
     private Vector3 moveRight;
     private Vector3 moveLeft;
     private bool isMovingRight;
-    private static bool isCurrentBlockStopped;
+    private bool isMoving;
 
-	public static void SetIsCurrentBlockStopped(bool isStopped){
-		isCurrentBlockStopped = isStopped;
+	public void SetIsMoving(bool isMoving){
+		this.isMoving = isMoving;
 	}
 
 	private Rigidbody currentBlockRb;
@@ -24,9 +23,8 @@ public class BlockMovement : MonoBehaviour {
         moveLeft = new Vector3(-5, 0, 0);
 
 		currentBlockRb = GetComponent<Rigidbody> ();
-
         isMovingRight = true;
-        isCurrentBlockStopped = false;
+        isMoving = true;
 
 
     }
@@ -34,23 +32,19 @@ public class BlockMovement : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
 
-
 		BlockMoveLeftAndRight(currentBlockRb);
-
-
-
 
     }
 
     // This method makes the block move left and right.
     void BlockMoveLeftAndRight(Rigidbody rb)
     {
-		if (isMovingRight && !isCurrentBlockStopped) {
+		if (isMovingRight && isMoving) {
 			rb.velocity = moveRight;
 			if (rb.position.x >= 6) {
 				isMovingRight = false;
 			}
-		} else if (!isMovingRight && !isCurrentBlockStopped) {
+		} else if (!isMovingRight && isMoving) {
 			rb.velocity = moveLeft;
 			if (rb.position.x <= -6) {
 				isMovingRight = true;

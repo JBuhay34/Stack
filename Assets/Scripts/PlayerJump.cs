@@ -16,7 +16,7 @@ public class PlayerJump : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+        Debug.Log(playerRB.velocity.y + "");
 
 		if (playerRB.velocity.y != 0) {
 			isFalling = true;
