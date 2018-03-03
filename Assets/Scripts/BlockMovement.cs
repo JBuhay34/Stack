@@ -13,7 +13,12 @@ public class BlockMovement : MonoBehaviour {
 		this.isMoving = isMoving;
 	}
 
-	private Rigidbody currentBlockRb;
+    public bool GetIsMoving()
+    {
+        return this.isMoving;
+    }
+
+    private Rigidbody currentBlockRb;
 
     // Use this for initialization
     void Start() {

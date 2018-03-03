@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerLandOnBlock : MonoBehaviour {
 
+    public ManageBlocks blockManager;
+    private GameObject currentMovingBlock;
+    private BlockMovement currentMovingBlockMovement;
+
 	// Use this for initialization
 	void Start () {
-		
+
+       currentMovingBlock = blockManager.getCurrentBlockPrefab();
+       currentMovingBlockMovement = currentMovingBlock.GetComponent<BlockMovement>();
+
 	}
 	
 	// Update is called once per frame
@@ -19,7 +26,7 @@ public class PlayerLandOnBlock : MonoBehaviour {
 		case "block": 
 			Debug.Log ("It hits block");
             // Need to get the current block that is moving in order to make this method work.
-			//BlockMovement.SetIsMoving(false);
+			currentMovingBlockMovement.SetIsMoving(false);
 			break;
 		}
 	}

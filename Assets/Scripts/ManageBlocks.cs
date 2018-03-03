@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class ManageBlocks : MonoBehaviour {
 
-    private List<GameObject> blocks;
+    private ArrayList blocks;
     private GameObject currentMovingBlock;
     public GameObject player;
     public GameObject blockPrefab;
 
 	// Use this for initialization
 	void Start () {
-        blocks = new List<GameObject>();
+        blocks = new ArrayList();
 
         blocks.Add(Instantiate(blockPrefab));
+
+        currentMovingBlock = blocks[blocks.Count - 1] as GameObject;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+
+        if (!currentMovingBlock.GetComponent<BlockMovement>().GetIsMoving())
+        {
+            int position = blocks.Count - 1;
+
+            blocks.Add(Instantiate(blockPrefab));
+            currentMovingBlock = blocks[position] as GameObject;
+            currentMovingBlock.transform.position = new Vector3(-8, position * 1.01f, 0);
+
+
+        }
 		
 	}
+
+
+    public GameObject getCurrentBlockPrefab()
+    {
+        return currentMovingBlock;
+    }
 }
